@@ -1,0 +1,36 @@
+buildscript {
+	ext {
+		springCloudVersion = '2.1.1.RELEASE'
+	}
+	dependencies {
+		classpath "org.springframework.cloud:spring-cloud-contract-gradle-plugin:${springCloudVersion}"
+		classpath "org.springframework.cloud:spring-cloud-contract-pact:${springCloudVersion}"
+	}
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.1.4.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '12'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-verifier'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
